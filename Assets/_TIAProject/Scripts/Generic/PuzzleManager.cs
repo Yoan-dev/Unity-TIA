@@ -171,16 +171,19 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
 
     private void Transparency(GameObject current)
     {
-        Material mat = current.GetComponent<Renderer>().material;
-        mat.SetFloat("_Mode", 3);
-        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        mat.SetInt("_ZWrite", 0);
-        mat.DisableKeyword("_ALPHATEST_ON");
-        mat.DisableKeyword("_ALPHABLEND_ON");
-        mat.EnableKeyword("_ALPHAPREMULTIPLY_ON");
-        mat.renderQueue = 3000;
-        mat.SetColor("_Color", new Color(0, 0, 0, 0));
+        foreach (Renderer rend in current.GetComponentsInChildren(typeof(Renderer)))
+        {
+            Material mat = rend.material;
+            mat.SetFloat("_Mode", 3);
+            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            mat.SetInt("_ZWrite", 0);
+            mat.DisableKeyword("_ALPHATEST_ON");
+            mat.DisableKeyword("_ALPHABLEND_ON");
+            mat.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+            mat.renderQueue = 3000;
+            mat.SetColor("_Color", new Color(0, 0, 0, 0));
+        }
     }
 
     #endregion Divers;
