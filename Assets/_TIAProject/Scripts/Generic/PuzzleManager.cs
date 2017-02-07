@@ -5,15 +5,17 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
 {
     #region Editor;
 
+    [Header("Generic")]
     public CameraController controller;
     public GameObject infobulle;
+    public UnityEngine.UI.Text textClock;
     public GameObject[] decorations;
+    [Header("Puzzle objects")]
     public GameObject[] prefabs;
     public string[] titles;
     public string[] descriptions;
     public int[] infobulleDistances;
     public bool[] considerRotations;
-    public UnityEngine.UI.Text textClock;
 
     #endregion Editor;
 
