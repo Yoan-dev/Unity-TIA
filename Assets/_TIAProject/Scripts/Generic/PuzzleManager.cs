@@ -68,7 +68,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             InitializeGraspableParts(graspable.transform, graspable.GetComponent<IGraspableObject>());
             InitializeHighlightedParts(graspable.transform, graspable.GetComponent<IHighlightedObject>());
             float angle = i * 360 / prefabs.Length;
-            graspable.transform.position = new Vector3(transform.position.x + Mathf.Cos(angle * Mathf.PI / 180) * 0.3f, transform.position.y + 0.1f, transform.position.z + Mathf.Sin(angle * Mathf.PI / 180) * 0.3f);
+            graspable.transform.position = new Vector3(transform.position.x + Mathf.Cos(angle * Mathf.PI / 180) * 1.0f, transform.position.y + 0.5f, transform.position.z + Mathf.Sin(angle * Mathf.PI / 180) * 1.0f);
             //
 
             // infobulle

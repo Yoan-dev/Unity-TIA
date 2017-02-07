@@ -32,7 +32,7 @@ public class GraspableObject : HighlightedObject, IGraspableObject, IPuzzleObjec
         Debug.Log(name + " grabbed");
         grabbed = true;
         transform.parent = newParent;
-        transform.localPosition = new Vector3(0, 0, 0.35f);
+        transform.localPosition = new Vector3(0, 0, 1.0f);
     }
 
     public void UnGrab()
