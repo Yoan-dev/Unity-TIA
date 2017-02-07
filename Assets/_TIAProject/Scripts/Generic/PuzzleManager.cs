@@ -182,7 +182,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             mat.DisableKeyword("_ALPHABLEND_ON");
             mat.EnableKeyword("_ALPHAPREMULTIPLY_ON");
             mat.renderQueue = 3000;
-            mat.SetColor("_Color", new Color(0, 0, 0, 0));
+            mat.SetColor("_Color", new Color(0, 0.25f, 1.0f, 0.25f));
         }
     }
 
