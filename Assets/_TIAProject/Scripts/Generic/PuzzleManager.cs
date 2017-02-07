@@ -184,20 +184,9 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
         foreach (Renderer rend in current.GetComponentsInChildren(typeof(Renderer)))
         {
             Material mat = rend.material;
-
-             // Transparency
-
-            /*mat.SetFloat("_Mode", 3);
-            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            mat.SetInt("_ZWrite", 0);
-            mat.DisableKeyword("_ALPHATEST_ON");
-            mat.DisableKeyword("_ALPHABLEND_ON");
-            mat.EnableKeyword("_ALPHAPREMULTIPLY_ON");
-            mat.renderQueue = 3000;*/
-
+            
             // Fade
-
+            mat.shader = Shader.Find("Standard");
             mat.SetFloat("_Mode", 2);
             mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
@@ -208,8 +197,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             mat.renderQueue = 3000;
 
             // Color
-
-            mat.SetColor("_Color", new Color(0, 0.25f, 1.0f, 0.25f));
+            mat.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 0.25f));
         }
     }
 
