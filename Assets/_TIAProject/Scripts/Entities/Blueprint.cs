@@ -7,7 +7,7 @@ public class Blueprint : HighlightedObject, IBlueprint
 
     void Update()
     {
-        if (graspable != null && Vector3.Distance(transform.position, graspable.transform.position) < 0.020f && (!considerRotation || Vector3.Angle(transform.up, graspable.transform.up) < 5.0f))
+        if (graspable != null && Vector3.Distance(transform.position, graspable.transform.position) < 0.040f && (!considerRotation || Vector3.Angle(transform.up, graspable.transform.up) < 10.0f))
             AutoComplete();
     }
 
