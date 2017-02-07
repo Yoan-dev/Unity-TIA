@@ -7,17 +7,20 @@ public class GraspableObject : HighlightedObject, IGraspableObject, IPuzzleObjec
     private GameObject infobulle;
     private IPuzzleManager manager;
     private ICameraController controller;
+    private ParticleSystem highlight;
     private bool grabbed;
     private bool completed;
 
     void Update()
     {
-        Color color;//
-        if (highlighted) color = Color.yellow;//
-        else if (grabbed) color = Color.red;//
-        else color = Color.white;//
-        foreach (MeshRenderer current in GetComponentsInChildren<MeshRenderer>())//
-            current.material.color = color;//
+        if (highlighted && !completed)
+        {
+            highlight.Play();
+        }
+        else
+        {
+            highlight.Stop();
+        }
         if (completed)
         {
             if (highlighted) infobulle.SetActive(true);
@@ -73,5 +76,10 @@ public class GraspableObject : HighlightedObject, IGraspableObject, IPuzzleObjec
     public void SetController(ICameraController controller)
     {
         this.controller = controller;
+    }
+
+    public void SetHighlight(ParticleSystem highlight)
+    {
+        this.highlight = highlight;
     }
 }

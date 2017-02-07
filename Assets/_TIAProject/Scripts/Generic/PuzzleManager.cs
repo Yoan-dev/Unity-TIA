@@ -8,6 +8,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
     [Header("Generic")]
     public CameraController controller;
     public GameObject infobulle;
+    public GameObject highlightParticles;//
     public UnityEngine.UI.Text textClock;
     public GameObject[] decorations;
     [Header("Puzzle objects")]
@@ -71,6 +72,12 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             InitializeHighlightedParts(graspable.transform, graspable.GetComponent<IHighlightedObject>());
             float angle = i * 360 / prefabs.Length;
             graspable.transform.position = new Vector3(transform.position.x + Mathf.Cos(angle * Mathf.PI / 180) * 1.0f, transform.position.y + 0.5f, transform.position.z + Mathf.Sin(angle * Mathf.PI / 180) * 1.0f);
+            //
+
+            // highlightParticles
+            GameObject highlight = Instantiate(highlightParticles, graspable.transform.position, Quaternion.identity, graspable.transform);
+            highlight.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            graspable.GetComponent<IPuzzleObject>().SetHighlight(highlight.GetComponent<ParticleSystem>());
             //
 
             // infobulle
