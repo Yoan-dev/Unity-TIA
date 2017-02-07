@@ -14,6 +14,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
     [Header("Puzzle objects")]
     public GameObject[] prefabs;
     public string[] titles;
+    [TextArea(12, 18)]
     public string[] descriptions;
     public int[] infobulleDistances;
     public bool[] considerRotations;
