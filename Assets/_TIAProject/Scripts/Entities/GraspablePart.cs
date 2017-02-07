@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GraspablePart : MonoBehaviour, IGraspableObject
 {
@@ -12,6 +13,11 @@ public class GraspablePart : MonoBehaviour, IGraspableObject
     public void UnGrab()
     {
         parent.UnGrab();
+    }
+
+    public bool IsCompleted()
+    {
+        return parent.IsCompleted();
     }
 
     public void SetParent(IGraspableObject parent)

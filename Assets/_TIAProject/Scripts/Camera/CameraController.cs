@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour, ICameraController {
             if (Input.GetMouseButtonUp(0))
             {
                 current.UnGrab();
-                Ungrab();
             }
         }
         else
@@ -34,8 +33,12 @@ public class CameraController : MonoBehaviour, ICameraController {
                     if (Input.GetMouseButtonUp(0))
                     {
                         Debug.Log("hit");
-                        current = hit.collider.GetComponent<IGraspableObject>();
-                        current.Grab(transform);
+                        IGraspableObject temp = hit.collider.GetComponent<IGraspableObject>();
+                        if (!temp.IsCompleted())
+                        {
+                            current = temp;
+                            current.Grab(transform);
+                        }
                     }
                 }
             }
