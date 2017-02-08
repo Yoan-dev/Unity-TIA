@@ -176,7 +176,6 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             ChangeObjectEnabled(current, true);
         foreach (GameObject current in additionalObjects)
             ChangeObjectEnabled(current, true);
-        Debug.Log("Win!");
     }
 
     private void Transparency(GameObject current)

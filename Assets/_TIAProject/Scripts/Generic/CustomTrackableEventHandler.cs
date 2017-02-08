@@ -65,7 +65,6 @@ namespace Vuforia
         {
             if (!firstFound)
             {
-                Debug.Log(firstFound);
                 GetComponent<PuzzleManager>().Initialize();
                 firstFound = true;
             }
