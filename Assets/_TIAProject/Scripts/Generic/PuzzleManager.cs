@@ -82,9 +82,9 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             //
 
             // infobulle
-            GameObject info = Instantiate(infobulle, transform);
+            GameObject info = Instantiate(infobulle, graspable.transform);
             info.name = current.name + "(Infobulle)";
-            info.transform.position = blueprint.transform.position;
+            info.transform.position = graspable.transform.position;
             info.transform.FindChild("Canvas").localPosition = new Vector3(0, 0, -infobulleDistances[i]);
             foreach (UnityEngine.UI.Text text in info.GetComponentsInChildren<UnityEngine.UI.Text>())
             {
