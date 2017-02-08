@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class Infobulle : MonoBehaviour {
-
+public class Infobulle : MonoBehaviour
+{
     private Transform arcamera;
 
 	void Start ()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class CameraController : MonoBehaviour, ICameraController {
-
+public class CameraController : MonoBehaviour, ICameraController
+{
     public bool target;
     public bool changeLight = false;
     public new GameObject light;
@@ -32,7 +32,6 @@ public class CameraController : MonoBehaviour, ICameraController {
                     target = true;
                     if (Input.GetMouseButtonUp(0))
                     {
-                        Debug.Log("hit");
                         IGraspableObject temp = hit.collider.GetComponent<IGraspableObject>();
                         if (!temp.IsCompleted())
                         {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine.EventSystems;
 
-public class LightButton : EventTrigger {
+public class LightButton : EventTrigger
+{
 
 }

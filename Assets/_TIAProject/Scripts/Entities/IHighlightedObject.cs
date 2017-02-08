@@ -1,5 +1,4 @@
-﻿public interface IHighlightedObject {
-
+﻿public interface IHighlightedObject
+{
     void Highlight();
-
 }

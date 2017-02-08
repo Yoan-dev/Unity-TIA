@@ -1,4 +1,4 @@
-﻿public interface ICameraController {
-
+﻿public interface ICameraController
+{
     void Ungrab();
 }

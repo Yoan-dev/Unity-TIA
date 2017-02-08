@@ -2,7 +2,6 @@
 
 public class Clock : IClock
 {
-
     private float startTime;
 
 	public void StartTime ()

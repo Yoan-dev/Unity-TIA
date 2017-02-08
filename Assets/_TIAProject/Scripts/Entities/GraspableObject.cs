@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GraspableObject : HighlightedObject, IGraspableObject, IPuzzleObject
 {
@@ -32,7 +31,6 @@ public class GraspableObject : HighlightedObject, IGraspableObject, IPuzzleObjec
 
     public void Grab(Transform newParent)
     {
-        Debug.Log(name + " grabbed");
         grabbed = true;
         transform.parent = newParent;
         transform.localPosition = new Vector3(0, 0, 1.2f);
@@ -40,7 +38,6 @@ public class GraspableObject : HighlightedObject, IGraspableObject, IPuzzleObjec
 
     public void UnGrab()
     {
-        Debug.Log(name + " ungrabbed");
         grabbed = false;
         transform.parent = originalParent;
         controller.Ungrab();
