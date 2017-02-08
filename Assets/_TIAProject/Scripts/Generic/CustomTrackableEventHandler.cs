@@ -70,9 +70,44 @@ namespace Vuforia
             }
 
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
+            Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+            AudioSource[] audioSourceComponents = GetComponentsInChildren<AudioSource>(true);
+            ParticleSystem[] particleSystemComponents = GetComponentsInChildren<ParticleSystem>(true);
+            Light[] lightComponents = GetComponentsInChildren<Light>(true);
+            Canvas[] canvasComponents = GetComponentsInChildren<Canvas>(true);
 
             // Enable rendering:
             foreach (Renderer component in rendererComponents)
+            {
+                component.enabled = true;
+            }
+
+            // Enable colliders:
+            foreach (Collider component in colliderComponents)
+            {
+                component.enabled = true;
+            }
+
+            // Enable audioSources:
+            foreach (AudioSource component in audioSourceComponents)
+            {
+                component.enabled = true;
+            }
+
+            // Enable particleSystems:
+            foreach (ParticleSystem component in particleSystemComponents)
+            {
+                component.Play();
+            }
+
+            // Enable lights:
+            foreach (Light component in lightComponents)
+            {
+                component.enabled = true;
+            }
+
+            // Enable canvas:
+            foreach (Canvas component in canvasComponents)
             {
                 component.enabled = true;
             }
@@ -81,9 +116,44 @@ namespace Vuforia
         private void OnTrackingLost()
         {
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
+            Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+            AudioSource[] audioSourceComponents = GetComponentsInChildren<AudioSource>(true);
+            ParticleSystem[] particleSystemComponents = GetComponentsInChildren<ParticleSystem>(true);
+            Light[] lightComponents = GetComponentsInChildren<Light>(true);
+            Canvas[] canvasComponents = GetComponentsInChildren<Canvas>(true);
 
             // Disable rendering:
             foreach (Renderer component in rendererComponents)
+            {
+                component.enabled = false;
+            }
+
+            // Disable colliders:
+            foreach (Collider component in colliderComponents)
+            {
+                component.enabled = false;
+            }
+
+            // Disable audioSources:
+            foreach (AudioSource component in audioSourceComponents)
+            {
+                component.enabled = false;
+            }
+
+            // Disable particleSystems:
+            foreach (ParticleSystem component in particleSystemComponents)
+            {
+                component.Stop();
+            }
+
+            // Disable lights:
+            foreach (Light component in lightComponents)
+            {
+                component.enabled = false;
+            }
+
+            // Enable canvas:
+            foreach (Canvas component in canvasComponents)
             {
                 component.enabled = false;
             }
