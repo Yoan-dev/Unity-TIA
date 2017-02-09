@@ -6,28 +6,28 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
     #region Editor;
 
     [Header("Generic")]
-    public CameraController controller;
-    public GameObject infobulle;
-    public GameObject highlightParticles;//
-    public UnityEngine.UI.Text textClock;
-    public GameObject[] decorations;
+    public CameraController controller; // the arcamera
+    public GameObject infobulle; // infobulle pregab
+    public GameObject highlightParticles; // highlight prefab
+    public UnityEngine.UI.Text textClock; // clock text UI
+    public GameObject[] decorations; // prefabs of objects belonging to the puzzle but not puzzle pieces themselves
     [Header("Puzzle objects")]
-    public GameObject[] prefabs;
-    public string[] titles;
+    public GameObject[] prefabs; // prefabs of objects belonging to the puzzle and that are puzzle pieces
+    public string[] titles; // titles corresponding to the puzzle pieces (for infobulle)
     [TextArea(12, 18)]
-    public string[] descriptions;
-    public int[] infobulleDistances;
-    public bool[] considerRotations;
+    public string[] descriptions; // descriptions corresponding to the puzzle pieces (for infobulle)
+    public int[] infobulleDistances; // metric corresponding to the puzzle pieces (for infobulle)
+    public bool[] considerRotations; // metric corresponding to the puzzle pieces (for blueprint completion)
 
     #endregion Editor;
 
     #region Attributes;
 
-    private IList<GameObject> puzzleObjects = new List<GameObject>();
-    private IList<GameObject> additionalObjects = new List<GameObject>();
-    private bool initialized = false;
-    private bool win = false;
-    private IClock clock;
+    private IList<GameObject> puzzleObjects = new List<GameObject>(); // our puzzle/graspable objects
+    private IList<GameObject> additionalObjects = new List<GameObject>(); // the decorations
+    private bool initialized = false; // is the puzzle initialized
+    private bool win = false; // is the puzzle finished
+    private IClock clock; // the clock
 
     #endregion Attributes;
 
@@ -35,11 +35,12 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
 
     void Start()
     {
-        clock = new Clock();
+        clock = new Clock(); // clock initialization
     }
 
     void Update()
     {
+        // while the puzzle is not finished, the clock will go on
         if (!win) textClock.text = clock.ToStringTime();
     }
 
@@ -51,9 +52,9 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
     {
         // puzzle objects instantiation
         int i = 0;
-        foreach (GameObject current in prefabs)
+        foreach (GameObject current in prefabs) // foreach puzzle piece
         {
-            // blueprint
+            // creation of a blueprint
             GameObject blueprint = Instantiate(current, transform);
             blueprint.name = current.name + "(Blueprint)";
             blueprint.AddComponent<Blueprint>();
@@ -61,7 +62,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             Transparency(blueprint);
             //
 
-            // graspable
+            // creation of a graspable object (the puzzle piece)
             GameObject graspable = Instantiate(current, transform);
             graspable.name = current.name + "(Graspable)";
             blueprint.GetComponent<IBlueprint>().SetGraspable(graspable);
@@ -75,13 +76,13 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             graspable.transform.position = new Vector3(transform.position.x + Mathf.Cos(angle * Mathf.PI / 180) * 1.0f, transform.position.y + 0.5f, transform.position.z + Mathf.Sin(angle * Mathf.PI / 180) * 1.0f);
             //
 
-            // highlightParticles
+            // initialization of highlightParticles (for the puzzle piece)
             GameObject highlight = Instantiate(highlightParticles, graspable.transform.position, Quaternion.identity, graspable.transform);
             highlight.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             graspable.GetComponent<IPuzzleObject>().SetHighlight(highlight.GetComponent<ParticleSystem>());
             //
 
-            // infobulle
+            // initialization of infobulle (for the puzzle piece)
             GameObject info = Instantiate(infobulle, graspable.transform);
             info.name = current.name + "(Infobulle)";
             info.transform.position = graspable.transform.position;
@@ -96,6 +97,9 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             graspable.GetComponent<IPuzzleObject>().SetInfobulle(info);
             //
 
+            // disactivation of objects components
+            // (scripts that does not belong to our framework, animations and so on)
+            // they will be reactivated once the puzzle if finished
             ChangeObjectEnabled(graspable, false);
             ChangeObjectEnabled(blueprint, false);
             puzzleObjects.Add(graspable);
@@ -116,6 +120,8 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
         clock.StartTime();
     }
 
+    // initialization of highlighted parts (childs of an highlighted object)
+    // allowing to highlight an object whatever the part we aim at
     private void InitializeHighlightedParts(Transform transform, IHighlightedObject parent)
     {
         for (int j = 0; j < transform.childCount; j++)
@@ -127,6 +133,8 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
         }
     }
 
+    // initialization of graspable parts (childs of an graspable object)
+    // allowing to grab an object whatever the part we aim at
     private void InitializeGraspableParts(Transform transform, IGraspableObject parent)
     {
         for (int j = 0; j < transform.childCount; j++)
@@ -142,6 +150,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
 
     #region Divers;
 
+    // enable/disable all fancy components of an object
     private void ChangeObjectEnabled(GameObject current, bool enable)
     {
         foreach (Component comp in current.GetComponentsInChildren(typeof(Component)))
@@ -164,6 +173,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             (component as MonoBehaviour).enabled = value;
     }
 
+    // verify if the puzzle is finished
     public void VerifyPuzzle()
     {
         if (!initialized || win) return;
@@ -178,6 +188,7 @@ public class PuzzleManager : MonoBehaviour, IPuzzleManager
             ChangeObjectEnabled(current, true);
     }
 
+    // fade an object (for blueprints)
     private void Transparency(GameObject current)
     {
         foreach (Renderer rend in current.GetComponentsInChildren(typeof(Renderer)))

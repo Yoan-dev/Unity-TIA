@@ -63,6 +63,7 @@ namespace Vuforia
 
         private void OnTrackingFound()
         {
+            // we initialize our puzzle when the image target is found for the first time
             if (!firstFound)
             {
                 GetComponent<PuzzleManager>().Initialize();

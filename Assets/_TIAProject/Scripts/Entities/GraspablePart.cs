@@ -2,7 +2,10 @@
 
 public class GraspablePart : MonoBehaviour, IGraspableObject
 {
-    private IGraspableObject parent;
+    private IGraspableObject parent; // the graspable object this object is a child of (or grand child, etc.)
+
+    /* For each feature of graspable object
+     * we relay the action to the parent */
 
     public void Grab(Transform newParent)
     {

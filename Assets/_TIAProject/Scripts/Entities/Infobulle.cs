@@ -2,7 +2,7 @@
 
 public class Infobulle : MonoBehaviour
 {
-    private Transform arcamera;
+    private Transform arcamera; // the arcamera transform for orientation
 
 	void Start ()
     {
@@ -11,7 +11,11 @@ public class Infobulle : MonoBehaviour
 	
 	void Update ()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - arcamera.position);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, arcamera.eulerAngles.z);
+        // when activated, the infobulle will "look at" the camera
+        if (gameObject.activeSelf)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.position - arcamera.position);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, arcamera.eulerAngles.z);
+        }
     }
 }
